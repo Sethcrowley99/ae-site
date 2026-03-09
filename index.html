@@ -531,7 +531,7 @@ function submitWaitlist(){
   body.append('entry.631495904',email);
   body.append('entry.38223474',store);
   fetch(url,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body.toString()});
-  formEl.innerHTML='<div style="padding:1rem 1.5rem;border-radius:12px;border:1px solid rgba(52,211,153,0.2);background:rgba(52,211,153,0.06);color:#34d399;font-size:0.92rem;font-weight:600;width:100%;text-align:center;">You\'re on the list! We\'ll reach out when AE is live.</div>';
+  formEl.innerHTML='<div style="padding:1rem 1.5rem;border-radius:12px;border:1px solid rgba(52,211,153,0.2);background:rgba(52,211,153,0.06);color:#34d399;font-size:0.92rem;font-weight:600;width:100%;text-align:center;grid-column:1/-1;">You\'re on the list! We\'ll reach out when AE is live.</div>';
   note.style.display='none';
 }
 </script>
