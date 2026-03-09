@@ -532,9 +532,9 @@ function submitWaitlist(){
   }
   const formEl=document.querySelector('.waitlist-form');
   const note=document.querySelector('.waitlist-note');
-  const url='https://docs.google.com/forms/d/e/1FAIpQLSc81dS1tvMiz8aGndMyQR1CdXaj23Uk1NswuZ_skcvVrxuLuA/formResponse';
+  const url='https://docs.google.com/forms/d/e/1FAIpQLSefAY02rIJY4H_FVKrkik3fPOc9KrRA8HWB_XRDiEMiJdvedw/formResponse';
   const body=new URLSearchParams();
-  body.append('entry.241431324',email);
+  body.append('entry.631495904',email);
   fetch(url,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body.toString()});
   formEl.innerHTML='<div style="padding:1rem 1.5rem;border-radius:12px;border:1px solid rgba(52,211,153,0.2);background:rgba(52,211,153,0.06);color:#34d399;font-size:0.92rem;font-weight:600;width:100%;text-align:center;">You\'re on the list! We\'ll reach out when AE is live.</div>';
   note.style.display='none';
