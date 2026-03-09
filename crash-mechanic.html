@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Crash Mechanic — Anticipation Engine Docs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+:root{
+  --navy-deep:#0b1023;
+  --navy:#0f1629;
+  --navy-light:#151d38;
+  --navy-card:#131a33;
+  --cyan:#22d3ee;
+  --teal:#2dd4a8;
+  --green:#34d399;
+  --green-bright:#4ade80;
+  --gradient:linear-gradient(135deg,#22d3ee,#2dd4a8,#4ade80);
+  --gradient-h:linear-gradient(90deg,#22d3ee,#2dd4a8,#4ade80);
+  --white:#f0f4f8;
+  --white-pure:#ffffff;
+  --gray-100:#c9d1d9;
+  --gray-200:#8b949e;
+  --gray-300:#6e7681;
+  --glow-cyan:0 0 40px rgba(34,211,238,0.15);
+  --font-main:'Sora',system-ui,sans-serif;
+  --font-mono:'IBM Plex Mono',monospace;
+}
+
+body{
+  background:var(--navy-deep);color:var(--gray-100);
+  font-family:var(--font-main);line-height:1.65;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+}
+
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:0.85rem 2.5rem;display:flex;justify-content:space-between;align-items:center;
+  background:rgba(11,16,35,0.85);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(34,211,238,0.08);
+}
+.logo{display:flex;align-items:center;gap:0.65rem;text-decoration:none;}
+.logo img{height:32px;width:32px;border-radius:7px;}
+.logo-text{font-weight:700;font-size:1rem;letter-spacing:-0.02em;}
+.logo-text span:first-child{color:var(--white-pure);}
+.logo-text span:last-child{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.back-link{font-size:0.82rem;font-weight:500;color:var(--gray-200);text-decoration:none;transition:color 0.2s;}
+.back-link:hover{color:var(--white-pure);}
+
+.doc-hero{padding:8rem 2rem 3rem;text-align:center;position:relative;}
+.doc-hero::before{content:'';position:absolute;top:10%;left:20%;width:400px;height:400px;background:radial-gradient(circle,rgba(34,211,238,0.06),transparent 65%);pointer-events:none;}
+.doc-tag{
+  display:inline-flex;align-items:center;gap:0.4rem;padding:0.3rem 0.85rem;border-radius:100px;
+  font-size:0.7rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
+  border:1px solid rgba(34,211,238,0.2);color:var(--cyan);background:rgba(34,211,238,0.05);margin-bottom:1rem;
+}
+.doc-hero h1{font-size:clamp(2rem,4.5vw,3rem);font-weight:800;letter-spacing:-0.03em;line-height:1.1;color:var(--white-pure);margin-bottom:0.75rem;}
+.doc-hero p{font-size:1.05rem;color:var(--gray-200);max-width:560px;margin:0 auto;}
+
+.doc-body{max-width:720px;margin:0 auto;padding:0 2rem 6rem;}
+.doc-section{margin-bottom:3rem;}
+.doc-section h2{font-size:1.35rem;font-weight:700;color:var(--white-pure);letter-spacing:-0.02em;margin-bottom:1rem;padding-bottom:0.75rem;border-bottom:1px solid rgba(255,255,255,0.06);}
+.doc-section p{font-size:0.92rem;color:var(--gray-100);line-height:1.75;margin-bottom:1rem;}
+.doc-section p:last-child{margin-bottom:0;}
+
+.callout{padding:1.25rem 1.5rem;border-radius:12px;margin:1.5rem 0;border:1px solid rgba(34,211,238,0.15);background:rgba(34,211,238,0.04);}
+.callout p{font-size:0.88rem;color:var(--gray-100);margin-bottom:0;}
+.callout strong{color:var(--cyan);}
+.callout-green{border-color:rgba(52,211,153,0.15);background:rgba(52,211,153,0.04);}
+.callout-green strong{color:var(--green);}
+
+.flow-list{list-style:none;counter-reset:flow;margin:1.25rem 0;}
+.flow-list li{counter-increment:flow;position:relative;padding:0.6rem 0 0.6rem 2.8rem;font-size:0.9rem;color:var(--gray-100);line-height:1.6;}
+.flow-list li::before{content:counter(flow);position:absolute;left:0;top:0.55rem;width:26px;height:26px;border-radius:7px;background:rgba(34,211,238,0.08);border:1px solid rgba(34,211,238,0.15);color:var(--cyan);font-size:0.72rem;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);}
+.flow-list li strong{color:var(--white-pure);}
+
+.doc-nav{display:flex;justify-content:space-between;gap:1rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.06);margin-top:3rem;}
+.doc-nav a{font-size:0.85rem;font-weight:600;color:var(--cyan);text-decoration:none;transition:opacity 0.2s;}
+.doc-nav a:hover{opacity:0.8;}
+
+footer{padding:2rem;text-align:center;font-size:0.78rem;color:var(--gray-300);border-top:1px solid rgba(255,255,255,0.04);}
+footer a{color:var(--gray-200);text-decoration:none;}
+footer a:hover{color:var(--cyan);}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">
+    <img src="ae-logo.png" alt="AE">
+    <div class="logo-text"><span>Anticipation</span><span>Engine</span></div>
+  </a>
+  <a href="index.html" class="back-link">← Back to Home</a>
+</nav>
+
+<div class="doc-hero">
+  <div class="doc-tag">Documentation</div>
+  <h1>The Crash Mechanic</h1>
+  <p>Why the crash exists, how it works under the hood, and what shoppers experience at every stage.</p>
+</div>
+
+<div class="doc-body">
+
+  <div class="doc-section">
+    <h2>Why crashes exist</h2>
+    <p>The crash is the core of what makes Anticipation Engine work. Without the possibility of losing the discount, there's no tension — and without tension, shoppers have no reason to cash out early. They'd simply wait for the maximum every time.</p>
+    <p>The crash creates a decision: take a guaranteed smaller discount now, or hold out for a bigger one that might disappear. This is the same variable reward psychology that makes scratch-off tickets, mystery boxes, and limited drops so compelling. The difference is that your shoppers never lose money — the worst outcome is paying the normal price.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2>How the crash works (technical)</h2>
+    <p>When a shopper clicks "Reveal Your Discount," the server determines a crash point before the meter starts moving. The shopper never sees or knows the crash point — they only see the meter climbing.</p>
+    <ol class="flow-list">
+      <li><strong>Session starts.</strong> The server selects a crash point based on your configured crash weights across 5% brackets.</li>
+      <li><strong>Meter climbs.</strong> The client receives only the game duration — never the crash point. The meter animates upward toward your maximum discount.</li>
+      <li><strong>Shopper decides.</strong> At any moment, the shopper can hit "Cash Out" to lock in the current percentage.</li>
+      <li><strong>Outcome.</strong> If the shopper cashes out before the crash point, they get their discount. If the meter reaches the crash point first, the discount is lost.</li>
+    </ol>
+    <div class="callout">
+      <p><strong>Security note:</strong> The crash point is calculated entirely server-side. The client never receives it, so shoppers cannot inspect network requests, read JavaScript variables, or otherwise predict when the crash will happen.</p>
+    </div>
+  </div>
+
+  <div class="doc-section">
+    <h2>Crash weights explained</h2>
+    <p>You control crash probability through bracket weights. Each bracket represents a 5% range of the discount meter, and you assign a probability weight to each one.</p>
+    <p>For example, if your max discount is 20% and your minimum floor is 5%, you have three brackets: 5–10%, 10–15%, and 15–20%. If you assign weights of 40/30/30, then 40% of sessions will crash somewhere in the 5–10% range, 30% in the 10–15% range, and 30% in the 15–20% range.</p>
+    <p>How you distribute your weights is entirely up to you. Different products, margins, and customer bases respond differently. Experiment with your weight distribution to find the balance that works best for your store — your dashboard analytics will show you exactly how shoppers are responding.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2>The shopper experience after a crash</h2>
+    <p>When the meter crashes, the shopper sees a brief, non-punitive message: "No luck this time" with a "Continue to my order" button. Their cart is completely untouched — no items removed, no changes.</p>
+    <p>The crash messaging is intentionally soft. The shopper didn't lose anything; they just didn't win an extra discount. Many shoppers who experience a crash still complete their purchase at full price. The interaction itself — the few seconds of watching the meter climb — creates enough engagement to keep them on the page rather than bouncing.</p>
+    <div class="callout-green callout">
+      <p><strong>Key insight:</strong> A crash isn't a failure for the merchant. It's a full-price conversion with zero discount cost. The shopper stayed engaged, didn't abandon, and checked out at your normal margin.</p>
+    </div>
+  </div>
+
+  <div class="doc-section">
+    <h2>Cooldown after crash</h2>
+    <p>After a crash (or a successful cashout), the shopper enters a cooldown period. The recommended cooldown is 24 hours, preventing shoppers from repeatedly playing to fish for a better result.</p>
+    <p>This protects your margins and keeps the experience feeling special rather than spammable.</p>
+  </div>
+
+  <div class="doc-nav">
+    <span></span>
+    <a href="theme-compatibility.html">Theme Compatibility →</a>
+  </div>
+
+</div>
+
+<footer>
+  <p>Anticipation Engine &nbsp;·&nbsp; <a href="mailto:anticipationengine@gmail.com">anticipationengine@gmail.com</a> &nbsp;·&nbsp; Built for Shopify</p>
+</footer>
+
+</body>
+</html>

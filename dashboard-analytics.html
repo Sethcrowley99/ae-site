@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard & Analytics — Anticipation Engine Docs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+:root{
+  --navy-deep:#0b1023;
+  --navy:#0f1629;
+  --navy-light:#151d38;
+  --navy-card:#131a33;
+  --cyan:#22d3ee;
+  --teal:#2dd4a8;
+  --green:#34d399;
+  --green-bright:#4ade80;
+  --gradient:linear-gradient(135deg,#22d3ee,#2dd4a8,#4ade80);
+  --gradient-h:linear-gradient(90deg,#22d3ee,#2dd4a8,#4ade80);
+  --white:#f0f4f8;
+  --white-pure:#ffffff;
+  --gray-100:#c9d1d9;
+  --gray-200:#8b949e;
+  --gray-300:#6e7681;
+  --glow-cyan:0 0 40px rgba(34,211,238,0.15);
+  --font-main:'Sora',system-ui,sans-serif;
+  --font-mono:'IBM Plex Mono',monospace;
+}
+
+body{
+  background:var(--navy-deep);color:var(--gray-100);
+  font-family:var(--font-main);line-height:1.65;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+}
+
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:0.85rem 2.5rem;display:flex;justify-content:space-between;align-items:center;
+  background:rgba(11,16,35,0.85);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(34,211,238,0.08);
+}
+.logo{display:flex;align-items:center;gap:0.65rem;text-decoration:none;}
+.logo img{height:32px;width:32px;border-radius:7px;}
+.logo-text{font-weight:700;font-size:1rem;letter-spacing:-0.02em;}
+.logo-text span:first-child{color:var(--white-pure);}
+.logo-text span:last-child{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.back-link{font-size:0.82rem;font-weight:500;color:var(--gray-200);text-decoration:none;transition:color 0.2s;}
+.back-link:hover{color:var(--white-pure);}
+
+.doc-hero{padding:8rem 2rem 3rem;text-align:center;position:relative;}
+.doc-hero::before{content:'';position:absolute;top:10%;left:30%;width:400px;height:400px;background:radial-gradient(circle,rgba(34,211,238,0.06),transparent 65%);pointer-events:none;}
+.doc-tag{
+  display:inline-flex;align-items:center;gap:0.4rem;padding:0.3rem 0.85rem;border-radius:100px;
+  font-size:0.7rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
+  border:1px solid rgba(34,211,238,0.2);color:var(--cyan);background:rgba(34,211,238,0.05);margin-bottom:1rem;
+}
+.doc-hero h1{font-size:clamp(2rem,4.5vw,3rem);font-weight:800;letter-spacing:-0.03em;line-height:1.1;color:var(--white-pure);margin-bottom:0.75rem;}
+.doc-hero p{font-size:1.05rem;color:var(--gray-200);max-width:560px;margin:0 auto;}
+
+.doc-body{max-width:720px;margin:0 auto;padding:0 2rem 6rem;}
+.doc-section{margin-bottom:3rem;}
+.doc-section h2{font-size:1.35rem;font-weight:700;color:var(--white-pure);letter-spacing:-0.02em;margin-bottom:1rem;padding-bottom:0.75rem;border-bottom:1px solid rgba(255,255,255,0.06);}
+.doc-section p{font-size:0.92rem;color:var(--gray-100);line-height:1.75;margin-bottom:1rem;}
+.doc-section p:last-child{margin-bottom:0;}
+
+.callout{padding:1.25rem 1.5rem;border-radius:12px;margin:1.5rem 0;border:1px solid rgba(34,211,238,0.15);background:rgba(34,211,238,0.04);}
+.callout p{font-size:0.88rem;color:var(--gray-100);margin-bottom:0;}
+.callout strong{color:var(--cyan);}
+
+.screenshot-gallery{margin:2rem 0;display:flex;flex-direction:column;gap:1.25rem;}
+.screenshot-item{border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);background:var(--navy-card);}
+.screenshot-item img{width:100%;display:block;}
+.screenshot-placeholder{
+  width:100%;aspect-ratio:16/9;
+  background:linear-gradient(135deg, rgba(34,211,238,0.04), rgba(52,211,153,0.04));
+  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.5rem;
+}
+.screenshot-placeholder svg{color:var(--gray-300);opacity:0.5;}
+.screenshot-placeholder span{font-size:0.8rem;color:var(--gray-300);font-weight:500;}
+.screenshot-caption{padding:0.85rem 1.25rem;font-size:0.82rem;color:var(--gray-200);border-top:1px solid rgba(255,255,255,0.05);line-height:1.55;}
+
+.metric-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0;}
+.metric-card{background:var(--navy-card);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:1.25rem 1.25rem;}
+.metric-name{font-size:0.78rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--cyan);margin-bottom:0.4rem;}
+.metric-desc{font-size:0.84rem;color:var(--gray-200);line-height:1.6;}
+
+.doc-nav{display:flex;justify-content:space-between;gap:1rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.06);margin-top:3rem;}
+.doc-nav a{font-size:0.85rem;font-weight:600;color:var(--cyan);text-decoration:none;transition:opacity 0.2s;}
+.doc-nav a:hover{opacity:0.8;}
+
+footer{padding:2rem;text-align:center;font-size:0.78rem;color:var(--gray-300);border-top:1px solid rgba(255,255,255,0.04);}
+footer a{color:var(--gray-200);text-decoration:none;}
+footer a:hover{color:var(--cyan);}
+
+@media(max-width:600px){.metric-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">
+    <img src="ae-logo.png" alt="AE">
+    <div class="logo-text"><span>Anticipation</span><span>Engine</span></div>
+  </a>
+  <a href="index.html" class="back-link">← Back to Home</a>
+</nav>
+
+<div class="doc-hero">
+  <div class="doc-tag">Documentation</div>
+  <h1>Dashboard & Analytics</h1>
+  <p>Every metric on your AE dashboard explained — plus a look at the settings page where you configure the mechanic.</p>
+</div>
+
+<div class="doc-body">
+
+  <div class="doc-section">
+    <h2>Settings page overview</h2>
+    <p>The AE settings page lives inside your Shopify admin. This is where you configure the core mechanic — max discount, crash weights, cooldown, and volume caps. Here's what it looks like:</p>
+
+    <div class="screenshot-gallery">
+      <div class="screenshot-item">
+        <!-- Replace the placeholder below with your actual screenshot -->
+        <!-- <img src="ae-settings-full.png" alt="AE Settings Page — Full View"> -->
+        <div class="screenshot-placeholder">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+          <span>AE Settings Page — Full View</span>
+        </div>
+        <div class="screenshot-caption">The main settings page where you configure your maximum discount, crash weights per bracket, cooldown period, and daily volume cap.</div>
+      </div>
+
+      <div class="screenshot-item">
+        <!-- Replace the placeholder below with your actual screenshot -->
+        <!-- <img src="ae-settings-weights.png" alt="AE Settings — Crash Weight Configuration"> -->
+        <div class="screenshot-placeholder">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+          <span>AE Settings — Crash Weight Configuration</span>
+        </div>
+        <div class="screenshot-caption">The crash weight sliders. Each bracket gets a percentage weight that controls how likely the meter is to crash in that range.</div>
+      </div>
+    </div>
+
+    <p>To add your screenshots: replace the placeholder <code>&lt;div&gt;</code> blocks above with <code>&lt;img&gt;</code> tags pointing to your image files. Uncomment the <code>&lt;img&gt;</code> lines and delete the corresponding <code>&lt;div class="screenshot-placeholder"&gt;</code> blocks.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2>Dashboard metrics</h2>
+    <p>Your AE dashboard gives you real numbers — not vanity metrics. Every data point is designed to help you evaluate whether AE is earning its keep.</p>
+
+    <div class="metric-grid">
+      <div class="metric-card">
+        <div class="metric-name">AE-Attributed Revenue</div>
+        <div class="metric-desc">Total revenue from orders where the shopper used an AE discount code. This is direct, trackable revenue — not modeled or estimated.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-name">Total Discount Cost</div>
+        <div class="metric-desc">The sum of all discounts given through AE. This is the actual dollar amount off your top line.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-name">ROI per Dollar Discounted</div>
+        <div class="metric-desc">AE-attributed revenue divided by total discount cost. A ratio of 8:1 means every dollar you gave away in discounts generated $8 in revenue.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-name">Average Discount Rate</div>
+        <div class="metric-desc">The mean discount percentage shoppers actually received. Compare this to your max discount to see how much you're saving versus a flat coupon.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-name">Total Sessions</div>
+        <div class="metric-desc">How many times shoppers clicked "Reveal Your Discount." Track this alongside cashout and crash rates to understand shopper behavior.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-name">Cashout Rate</div>
+        <div class="metric-desc">Percentage of sessions that ended in a successful cashout (vs. a crash). This tells you how many shoppers are walking away with a discount.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-name">Crash Rate</div>
+        <div class="metric-desc">Percentage of sessions that ended in a crash. Remember — crashes aren't bad. They mean full-price potential with zero discount cost.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-name">Repeat Customers</div>
+        <div class="metric-desc">Shoppers who've used AE more than once across separate visits. High repeat rates suggest the mechanic is driving return traffic.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-section">
+    <h2>Reading your numbers</h2>
+    <p>The most important metric is your average discount rate relative to your max. If your max is 20% and your average is 9%, the mechanic is working — shoppers are cashing out early, and you're spending less than what a flat 20% coupon would cost.</p>
+    <p>Use your dashboard to experiment. Adjust your crash weights, observe how your cashout rate and average discount shift over the following days, and dial in the configuration that fits your margins and your customers.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2>Revenue attribution</h2>
+    <p>AE tracks revenue attribution through Shopify's native discount code system. When a shopper cashes out, AE generates a unique discount code and auto-applies it at checkout. If that code appears on a completed order, the order's revenue is attributed to AE.</p>
+    <p>This is clean, verifiable attribution with no gray areas. You can cross-reference AE-attributed orders in your Shopify admin by searching for orders with AE-generated discount codes (they follow a recognizable naming pattern).</p>
+  </div>
+
+  <div class="doc-nav">
+    <a href="theme-compatibility.html">← Theme Compatibility</a>
+    <span></span>
+  </div>
+
+</div>
+
+<footer>
+  <p>Anticipation Engine &nbsp;·&nbsp; <a href="mailto:anticipationengine@gmail.com">anticipationengine@gmail.com</a> &nbsp;·&nbsp; Built for Shopify</p>
+</footer>
+
+</body>
+</html>
