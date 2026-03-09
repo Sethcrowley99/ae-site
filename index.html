@@ -211,6 +211,20 @@ section{padding:6rem 2rem;}
 .doc-link p{font-size:0.82rem;color:var(--gray-300);line-height:1.55;}
 .doc-link .arrow{display:inline-block;margin-top:0.75rem;font-size:0.78rem;font-weight:600;color:var(--cyan);}
 
+.doc-screenshots{
+  display:flex;gap:0.75rem;margin-top:1rem;flex-wrap:wrap;
+}
+.doc-screenshot-placeholder{
+  width:100%;aspect-ratio:16/10;border-radius:8px;
+  background:rgba(34,211,238,0.04);border:1px dashed rgba(34,211,238,0.15);
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.72rem;color:var(--gray-300);font-weight:500;text-align:center;
+  padding:0.5rem;
+}
+.doc-screenshot-placeholder img{
+  width:100%;height:100%;object-fit:cover;border-radius:8px;
+}
+
 /* FAQ */
 #faq{background:var(--navy);}
 .faq-list{max-width:700px;margin:0 auto;}
@@ -326,7 +340,7 @@ footer a:hover{color:var(--cyan);}
       <div class="how-card reveal">
         <div class="how-num">01</div>
         <h3>Set your rules</h3>
-        <p>Configure your max discount, minimum floor, and crash probability weights. You control exactly how generous every session is — bracket by bracket.</p>
+        <p>Configure your max discount and crash probability weights. You control exactly how generous every session is — bracket by bracket.</p>
       </div>
       <div class="how-card reveal">
         <div class="how-num">02</div>
@@ -396,7 +410,7 @@ footer a:hover{color:var(--cyan);}
         <p>No developers. No code. Just install, configure, and enable.</p>
         <ol class="setup-list">
           <li>Install <strong>Anticipation Engine</strong> from the Shopify App Store.</li>
-          <li>Open the AE dashboard in your Shopify admin. Set your <strong>max discount</strong>, <strong>min floor</strong>, and <strong>crash weights</strong>.</li>
+          <li>Open the AE dashboard in your Shopify admin. Set your <strong>max discount</strong> and <strong>crash weights</strong>.</li>
           <li>Go to <strong>Online Store → Themes → Customize</strong>. Navigate to your Cart page.</li>
           <li>Add the <strong>Reveal My Price</strong> block from Apps in the sidebar. Position it near your checkout button.</li>
           <li>Hit <strong>Save</strong>. You're live.</li>
@@ -410,18 +424,14 @@ footer a:hover{color:var(--cyan);}
           <div class="config-example">Recommended: 15–25%</div>
         </div>
         <div class="config-item">
-          <div class="config-label">Minimum Floor</div>
-          <div class="config-desc">Where the meter starts. Shoppers always begin here when they click reveal.</div>
-          <div class="config-example">Recommended: 5–10%</div>
-        </div>
-        <div class="config-item">
           <div class="config-label">Crash Weights</div>
           <div class="config-desc">Control crash probability across 5% brackets. Front-load weights to lower brackets to keep your average discount low while maintaining excitement.</div>
           <div class="config-example">e.g. 40% / 30% / 20% / 10%</div>
         </div>
         <div class="config-item">
           <div class="config-label">Cooldown & Volume Cap</div>
-          <div class="config-desc">Prevent repeat plays and cap daily sessions to control total discount exposure.</div>
+          <div class="config-desc">Prevent repeat plays with a per-shopper cooldown and cap daily sessions to control total discount exposure.</div>
+          <div class="config-example">Recommended: 24-hour cooldown</div>
         </div>
       </div>
     </div>
@@ -442,12 +452,18 @@ footer a:hover{color:var(--cyan);}
       </a>
       <a href="#" class="doc-link" onclick="event.preventDefault();">
         <h4>Theme Compatibility</h4>
-        <p>Cart page blocks, cart drawer embeds via MutationObserver, and which themes have been tested.</p>
+        <p>Works with every Online Store 2.0 theme. Cart page blocks and cart drawer embeds via MutationObserver — no code required.</p>
         <span class="arrow">Read more →</span>
       </a>
       <a href="#" class="doc-link" onclick="event.preventDefault();">
         <h4>Dashboard & Analytics</h4>
         <p>Every metric on your dashboard explained — revenue attribution, ROI, average discount, repeat customers.</p>
+        <div class="doc-screenshots">
+          <!-- Replace src with actual screenshot paths -->
+          <div class="doc-screenshot-placeholder">
+            <img src="ae-settings-screenshot.png" alt="AE Settings Page" onerror="this.style.display='none';this.parentElement.textContent='Settings page screenshot';">
+          </div>
+        </div>
         <span class="arrow">Read more →</span>
       </a>
     </div>
@@ -463,11 +479,11 @@ footer a:hover{color:var(--cyan);}
     <div class="faq-list reveal">
       <div class="faq-item">
         <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Does this work with my theme?</button>
-        <div class="faq-a">Anticipation Engine uses Shopify's native theme app extensions and works with any Online Store 2.0 compatible theme. It's been tested on Dawn and Refresh, and includes an automatic cart drawer embed for AJAX cart themes.</div>
+        <div class="faq-a">Anticipation Engine works with every Online Store 2.0 compatible theme. It uses Shopify's native theme app extensions and includes an automatic cart drawer embed for AJAX cart themes — no code or manual configuration needed.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Can shoppers cheat or abuse the discount?</button>
-        <div class="faq-a">Each cashout generates a unique, single-use Shopify discount code. Codes can't be shared, reused, or stacked. The discount is percentage-based, so adding items post-cashout benefits you. A configurable cooldown prevents repeat plays.</div>
+        <div class="faq-a">Each cashout generates a unique, single-use Shopify discount code. Codes can't be shared, reused, or stacked. The discount is percentage-based, so adding items post-cashout benefits you. A 24-hour cooldown prevents repeat plays.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">What happens when the meter crashes?</button>
