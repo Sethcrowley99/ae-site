@@ -211,19 +211,14 @@ section{padding:6rem 2rem;}
 .doc-link p{font-size:0.82rem;color:var(--gray-300);line-height:1.55;}
 .doc-link .arrow{display:inline-block;margin-top:0.75rem;font-size:0.78rem;font-weight:600;color:var(--cyan);}
 
-.doc-screenshots{
-  display:flex;gap:0.75rem;margin-top:1rem;flex-wrap:wrap;
-}
+.doc-screenshots{display:flex;gap:0.75rem;margin-top:1rem;flex-wrap:wrap;}
 .doc-screenshot-placeholder{
   width:100%;aspect-ratio:16/10;border-radius:8px;
   background:rgba(34,211,238,0.04);border:1px dashed rgba(34,211,238,0.15);
   display:flex;align-items:center;justify-content:center;
-  font-size:0.72rem;color:var(--gray-300);font-weight:500;text-align:center;
-  padding:0.5rem;
+  font-size:0.72rem;color:var(--gray-300);font-weight:500;text-align:center;padding:0.5rem;
 }
-.doc-screenshot-placeholder img{
-  width:100%;height:100%;object-fit:cover;border-radius:8px;
-}
+.doc-screenshot-placeholder img{width:100%;height:100%;object-fit:cover;border-radius:8px;}
 
 /* FAQ */
 #faq{background:var(--navy);}
@@ -412,7 +407,7 @@ footer a:hover{color:var(--cyan);}
           <li>Install <strong>Anticipation Engine</strong> from the Shopify App Store.</li>
           <li>Open the AE dashboard in your Shopify admin. Set your <strong>max discount</strong> and <strong>crash weights</strong>.</li>
           <li>Go to <strong>Online Store → Themes → Customize</strong>. Navigate to your Cart page.</li>
-          <li>Add the <strong>Reveal My Price</strong> block from Apps in the sidebar. Position it near your checkout button.</li>
+          <li>Add the <strong>Reveal My Price</strong> block from Apps in the sidebar. Position it above your checkout button.</li>
           <li>Hit <strong>Save</strong>. You're live.</li>
         </ol>
       </div>
@@ -425,7 +420,7 @@ footer a:hover{color:var(--cyan);}
         </div>
         <div class="config-item">
           <div class="config-label">Crash Weights</div>
-          <div class="config-desc">Control crash probability across 5% brackets. Front-load weights to lower brackets to keep your average discount low while maintaining excitement.</div>
+          <div class="config-desc">Distribute crash probability across 5% brackets to shape the shopper experience. Tune the balance between excitement and reward to match your margins.</div>
           <div class="config-example">e.g. 40% / 30% / 20% / 10%</div>
         </div>
         <div class="config-item">
@@ -445,17 +440,17 @@ footer a:hover{color:var(--cyan);}
       <h2 class="section-title">Need the details? We've got docs.</h2>
     </div>
     <div class="docs-preview reveal">
-      <a href="#" class="doc-link" onclick="event.preventDefault();">
+      <a href="crash-mechanic.html" class="doc-link">
         <h4>The Crash Mechanic</h4>
         <p>Why the crash exists, how it works for shoppers and merchants, and what happens after a crash outcome.</p>
         <span class="arrow">Read more →</span>
       </a>
-      <a href="#" class="doc-link" onclick="event.preventDefault();">
+      <a href="theme-compatibility.html" class="doc-link">
         <h4>Theme Compatibility</h4>
-        <p>Works with every Online Store 2.0 theme. Cart page blocks and cart drawer embeds via MutationObserver — no code required.</p>
+        <p>Works with every Online Store 2.0 theme. Cart page blocks, cart drawer and notification embeds — no code required.</p>
         <span class="arrow">Read more →</span>
       </a>
-      <a href="#" class="doc-link" onclick="event.preventDefault();">
+      <a href="dashboard-analytics.html" class="doc-link">
         <h4>Dashboard & Analytics</h4>
         <p>Every metric on your dashboard explained — revenue attribution, ROI, average discount, repeat customers.</p>
         <div class="doc-screenshots">
@@ -479,7 +474,7 @@ footer a:hover{color:var(--cyan);}
     <div class="faq-list reveal">
       <div class="faq-item">
         <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Does this work with my theme?</button>
-        <div class="faq-a">Anticipation Engine works with every Online Store 2.0 compatible theme. It uses Shopify's native theme app extensions and includes an automatic cart drawer embed for AJAX cart themes — no code or manual configuration needed.</div>
+        <div class="faq-a">Anticipation Engine works with every Online Store 2.0 compatible theme. It uses Shopify's native theme app extensions and includes an automatic embed for cart drawers and cart notifications — no code or manual configuration needed.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Can shoppers cheat or abuse the discount?</button>
